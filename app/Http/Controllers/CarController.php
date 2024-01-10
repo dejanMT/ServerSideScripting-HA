@@ -33,12 +33,19 @@ class CarController extends Controller
     public function store(Request $request)
     {
 
+        $errorMessages = [
+            'model.required' => 'The car model is required.',
+            'year.required' => 'The year model is required.',
+            'salesperson_email.required' => 'Please specidy email.',
+            'manufacturer_id.required' => 'Please select a manufacturer.'
+        ];
+
         $request->validate([
             'model' => 'required',
             'year' => 'required|integer|digits:4|',
             'salesperson_email' => 'required|email',
             'manufacturer_id' => 'required|exists:manufacturers,id'
-        ]);
+        ],  $errorMessages);
     
     
         Car::create($request->all());
