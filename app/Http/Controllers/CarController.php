@@ -26,7 +26,7 @@ class CarController extends Controller
 
     public function create(){
         $car = new Car();
-        $manufactors = Manufacturer::orderBy('name')->pluck('name', 'id')->prepend('All Manufactors', '');
+        $manufactors = Manufacturer::orderBy('name')->pluck('name', 'id');
         return view('cars.create', compact('manufactors', 'car'));
     }
            
@@ -50,6 +50,36 @@ class CarController extends Controller
     
         Car::create($request->all());
         return redirect()->route('cars.index')->with('message', 'Car has been added successfully');
+    }
+
+    public function edit($id)
+    {
+        $car = Car::find($id);
+        $manufactors = Manufacturer::orderBy('name')->pluck('name', 'id');
+        return view('cars.edit', compact('manufactors', 'car'));
+    }
+
+    public function update($id, Request $request)
+    {
+        $errorMessages = [
+            'model.required' => 'The car model is required.',
+            'year.required' => 'The year model is required.',
+            'salesperson_email.required' => 'Please specidy email.',
+            'manufacturer_id.required' => 'Please select a manufacturer.'
+        ];
+
+        $request->validate([
+            'model' => 'required',
+            'year' => 'required|integer|digits:4|',
+            'salesperson_email' => 'required|email',
+            'manufacturer_id' => 'required|exists:manufacturers,id'
+        ],  $errorMessages);
+
+
+        $car = Car::find($id);
+        $car->update($request->all());
+
+        return redirect()->route('cars.index')->with('message', 'The car has been updated successfully');
     }
 
 }

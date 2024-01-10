@@ -35,10 +35,7 @@ Route::post('/cars', [CarController::class, 'store'])->name('cars.store');
 //display car (by id)
 Route::get('/cars/{id}', [CarController::class, 'show'])->name('cars.show');
 
-Route::get('/cars/edit/{id}', function () {
-    return view('./cars.edit');
-});
+//edit car
+Route::get('/cars/{id}/edit', [CarController::class, 'edit'])->name('cars.edit');
 
-Route::get('/cars/show/{id}', function () {
-    return view('./cars.show');
-});
+Route::put('/cars/{id}', [CarController::class, 'update'])->name('cars.update');
