@@ -82,4 +82,11 @@ class CarController extends Controller
         return redirect()->route('cars.index')->with('message', 'The car has been updated successfully');
     }
 
+    public function destroy ($id)
+    {
+        $car = Car::find($id);
+        $car->delete();
+        return redirect()->route('cars.index')->with('message', 'Car has been deleted successfully');
+    }
+
 }
