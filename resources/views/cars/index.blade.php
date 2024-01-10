@@ -16,9 +16,7 @@
             </div>
           <div class="card-body">
 
-
-         
-
+          @include('cars._filter')
 
             <table class="table table-striped table-hover">
               <thead>
