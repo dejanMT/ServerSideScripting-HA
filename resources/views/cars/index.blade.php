@@ -44,7 +44,7 @@
                       <td>{{ $car->salesperson_email }}</td>
                      <td>{{ $car->manufacturer->name }}</td>
                       <td width="150">
-                        <a href="" class="btn btn-sm btn-circle btn-outline-info" title="Show"><i class="fa fa-eye"></i></a>
+                        <a href="{{ route('cars.show', $car->id) }}" class="btn btn-sm btn-circle btn-outline-info" title="Show"><i class="fa fa-eye"></i></a>
                       </td>
                     </tr>
                   @endforeach

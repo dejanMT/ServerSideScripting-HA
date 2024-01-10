@@ -26,6 +26,9 @@ Route::get('/cars', [CarController::class, 'index'])->name('cars.index');
 //display all manufacturers
 Route::get('/manufacturers', [ManufacturerController::class, 'index'])->name('manufacturers.index');
 
+//display car (by id)
+Route::get('/cars/{id}', [CarController::class, 'show'])->name('cars.show');
+
 Route::get('/cars/craete', function () {
     return view('./cars.craete');
 });
